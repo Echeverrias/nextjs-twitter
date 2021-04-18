@@ -1,35 +1,20 @@
 import NavBar from '../NavBar'
 import Footer from '../Footer'
 
+import styles, {globalStyles} from './styles'
+
 export default function AppLayout({children}){
     return (
         <>
         <NavBar />
+        <div>
         <main>
             {children}
         </main>
+        </div>
         <Footer />
-         <style jsx global>{`
-        html,
-        body{
-          padding:0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-
-        }
-
-        *{
-          box-sizing: border-box;
-        }
-        .main {
-            padding: 5rem 0;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-      `}</style>
+        <style jsx>{styles}</style>
+         <style jsx global>{globalStyles}</style>
         </>
 
     )
