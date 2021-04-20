@@ -7,10 +7,6 @@
   align-items: center;
 }
 
-
-
-
-
 .title a {
   color: #0070f3;
   text-decoration: none;
@@ -85,7 +81,6 @@
   font-size: 1.25rem;
   line-height: 1.5;
 }
-
 
 @media (max-width: 600px) {
   .grid {
