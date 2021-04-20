@@ -2,7 +2,14 @@ import Avatar from 'components/Avatar'
 
 import styles from './styles.js'
 
-export default function Devit ({ id, username, avatar, message }) {
+export default function Devit ({
+  id,
+  username,
+  avatar,
+  content,
+  createdAt,
+  userId
+}) {
   return (
     <>
       <article>
@@ -11,7 +18,8 @@ export default function Devit ({ id, username, avatar, message }) {
         </div>
         <section>
           <strong>{username}</strong>
-          <p>{message}</p>
+          <data>{createdAt}</data>
+          <p>{content}</p>
         </section>
       </article>
       <style jsx>{styles}</style>

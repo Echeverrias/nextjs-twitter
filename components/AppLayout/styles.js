@@ -18,6 +18,7 @@ export default css`
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     height: 100%;
+    overflow-y: auto;
     position: relative;
     width: 100%;
   }
@@ -35,20 +36,18 @@ export const globalStyles = css.global`
       radial-gradient(${backgroundColor} 1px, #fdfdfd 1px);
     background-position: 0 0, 25px 25px;
     background-size: 50px 50px;
-    padding: 0;
-    margin: 0;
     font-family: ${fonts.base};
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
   }
 
   * {
     box-sizing: border-box;
   }
-  .main {
-    padding: 5rem 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+  input,
+  textarea {
+    font-family: ${fonts.base};
   }
 `
