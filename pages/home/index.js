@@ -12,8 +12,8 @@ import styles from './styles.js'
 import { fetchLatestDevits } from '../../firebase/client.js'
 import Create from 'components/Icons/Create.js'
 import HomeIcon from 'components/Icons/Home.js'
-import Search from '../../components/Icons/Search.js'
-import Header from '../../components/Header/index.js'
+import Search from 'components/Icons/Search.js'
+import Header from 'components/Header/index.js'
 
 export default function Home ({ children }) {
   const [timeline, setTimeline] = useState([])
@@ -77,6 +77,7 @@ export default function Home ({ children }) {
                     img={img}
                     username={username}
                     userId={userId}
+                    actualUserId={user.uid}
                   />
                 )
               }

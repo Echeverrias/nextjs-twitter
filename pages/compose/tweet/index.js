@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import styles from './styles.js'
 
 import AppLayout from 'components/AppLayout'
 import Avatar from 'components/Avatar'
 import Button from 'components/Button'
 import useUser from 'hooks/useUser'
-import { addDevit } from 'firebase/client.js'
+import { addDevit, uploadFile } from 'firebase/client.js'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { uploadImage } from '../../../firebase/client.js'
-import Header from '../../../components/Header/index.js'
+
+import Header from 'components/Header/index.js'
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -29,6 +29,7 @@ const DRAG_IMAGES_STATES = {
 // const IMAGES_EXTENSIONS = new Set(['jpg', 'jpeg', 'gif', 'svg', 'png'])
 
 const isValidImage = (file) => {
+  console.log(file)
   return /image/.test(file.type)
   /*
   const extension = file.name.replace(/(.+)\.(.)/, "$2")
@@ -44,11 +45,15 @@ export default function ComposeTweet () {
   const [status, setStatus] = useState(COMPOSE_STATES.USER_NOT_KNOWN)
   const [drag, setDrag] = useState(DRAG_IMAGES_STATES.NONE)
   const [fileTask, setFileTask] = useState(null)
+  const [file, setFile] = useState(null)
   const [imgURL, setImgURL] = useState(null)
+  const fileInput = useRef(null)
 
   const user = useUser()
   const router = useRouter()
 
+  /*
+  // To upload the image whe you drop it
   useEffect(() => {
     if (fileTask) {
       const onProgress = () => {}
@@ -59,20 +64,14 @@ export default function ComposeTweet () {
       fileTask.on('state_changed', onProgress, onError, onComplete)
     }
   }, [fileTask])
+  */
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setStatus(COMPOSE_STATES.LOADING)
-    console.log(isButtonDissabled)
+  const uploadContent = (img = null) => {
     addDevit({
       avatar: user.avatar,
       content: formData.content,
       email: user.email,
-      img: imgURL,
+      img: img || imgURL,
       userId: user.uid,
       username: user.username
     })
@@ -81,6 +80,65 @@ export default function ComposeTweet () {
         console.error(err)
         setStatus(COMPOSE_STATES.ERROR)
       })
+  }
+
+  const uploadImageAndContent = () => {
+    const fileTask_ = uploadFile(file, user.uid)
+    setFileTask(fileTask_)
+    console.log(fileTask)
+    const onProgress = () => {}
+    const onError = () => {}
+    const onComplete = () => {
+      fileTask_.snapshot.ref.getDownloadURL().then((imgURL_) => {
+        setImgURL(imgURL_)
+        uploadContent(imgURL_)
+      })
+    }
+    fileTask_.on('state_changed', onProgress, onError, onComplete)
+  }
+
+  const uploadDevit = () => {
+    if (file) {
+      uploadImageAndContent()
+    } else {
+      uploadContent()
+    }
+  }
+
+  const loadImage = (file) => {
+    const reader = new FileReader()
+    reader.onloadend = function () {
+      setImgURL(reader.result)
+    }
+
+    if (file) {
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const validateAndLoadImage = (file) => {
+    if (isValidImage(file)) {
+      setFile(file)
+      loadImage(file)
+      return true
+    }
+    return false
+  }
+
+  const handleChange = (e) => {
+    if (e.target.name === 'file') {
+      const file_ = e.target.files[0]
+      if (!validateAndLoadImage(file_)) {
+        console.log('Not an image')
+      }
+    }
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setStatus(COMPOSE_STATES.LOADING)
+    uploadDevit()
   }
 
   const handleDragEnter = (e) => {
@@ -95,13 +153,23 @@ export default function ComposeTweet () {
 
   const handleDrop = (e) => {
     e.preventDefault()
-    const file = e.dataTransfer.files[0]
-    console.log(file)
+    const file_ = e.dataTransfer.files[0]
+    fileInput.current.value = null
     setDrag(DRAG_IMAGES_STATES.NONE)
+    /*
     if (isValidImage(file)) {
       const task = uploadImage(file)
       setFileTask(task)
     }
+    */
+    if (!validateAndLoadImage(file_)) {
+      console.log('Not an image')
+    }
+  }
+
+  const handleCancelImage = (e) => {
+    setImgURL(null)
+    fileInput.current.value = null
   }
 
   const isButtonDissabled =
@@ -130,9 +198,15 @@ export default function ComposeTweet () {
               onDrop={handleDrop}
               placeholder="What is happening?"
             ></textarea>
+            <input
+              ref={fileInput}
+              type="file"
+              name="file"
+              onChange={handleChange}
+            />
             {imgURL && (
               <figure className="loaded-img">
-                <button onClick={() => setImgURL(null)}>x</button>
+                <button onClick={handleCancelImage}>x</button>
                 <img src={imgURL} />
               </figure>
             )}

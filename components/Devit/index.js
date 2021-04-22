@@ -1,6 +1,8 @@
 import Avatar from 'components/Avatar'
 import useTimeAgo from 'hooks/useTimeAgo.js'
 
+import { deleteDevit } from 'firebase/client.js'
+
 import styles from './styles.js'
 
 export default function Devit ({
@@ -10,7 +12,8 @@ export default function Devit ({
   content,
   createdAt,
   img,
-  userId
+  userId,
+  actualUserId
 }) {
   const timeAgo = useTimeAgo(createdAt)
 
@@ -24,6 +27,9 @@ export default function Devit ({
           <div>
             <strong>{username}</strong>
             {timeAgo && <time>{timeAgo}</time>}
+            {userId === actualUserId && (
+              <button onClick={() => deleteDevit(id)}>x</button>
+            )}
           </div>
           <p>{content}</p>
           <div>{img && <img src={img} />}</div>

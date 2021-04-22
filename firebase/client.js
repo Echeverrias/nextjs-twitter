@@ -77,8 +77,23 @@ export const fetchLatestDevits = () => {
     })
 }
 
-export const uploadImage = (file) => {
-  const ref = firebase.storage().ref(`images/${file.name}`)
+export const uploadFile = (file, id) => {
+  console.log(`upload file id ${id}`)
+  const folder = file.type
+  const ref = firebase.storage().ref(`${folder}/${id}/${file.name}`)
   const task = ref.put(file)
   return task
+}
+
+export const deleteDevit = (id) => {
+  console.log('deletedevit')
+  db.collection('devits')
+    .doc(id)
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!')
+    })
+    .catch((error) => {
+      console.error('Error removing document: ', error)
+    })
 }

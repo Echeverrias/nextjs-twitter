@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'
 
-import { colors } from '../../styles/themes'
+import { colors } from 'styles/themes'
 
 export default css`
   button {

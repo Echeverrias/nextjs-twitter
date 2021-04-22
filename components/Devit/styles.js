@@ -20,6 +20,7 @@ export default css`
     padding-left: 10px;
     font-size: 15px;
     color: grey;
+    flex: 1;
   }
 
   p {
@@ -33,5 +34,14 @@ export default css`
     height: auto;
     margin: auto;
     width: 100%;
+  }
+
+  button {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  button {
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
   }
 `
