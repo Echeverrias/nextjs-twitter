@@ -11,12 +11,27 @@ export default css`
     padding-right: 10px;
   }
 
-  strong {
-    padding-right: 10px;
+  section div {
+    align-items: center;
+    display: flex;
+  }
+
+  time {
+    padding-left: 10px;
+    font-size: 15px;
+    color: grey;
   }
 
   p {
     line-height: 1.3125;
     margin: 0;
+    padding: 15px 0px;
+  }
+
+  img {
+    border-radius: 10px;
+    height: auto;
+    margin: auto;
+    width: 100%;
   }
 `

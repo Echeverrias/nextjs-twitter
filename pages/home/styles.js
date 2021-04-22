@@ -1,5 +1,7 @@
 import css from 'styled-jsx/css'
 
+import { colors } from 'styles/themes.js'
+
 export default css`
   article {
     border-bottom: 1px solid #eee;
@@ -7,33 +9,64 @@ export default css`
     padding: 10px 15px;
   }
 
-  header {
-    align-items: center;
-    background: #ffffffaa;
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid #ccc;
-    display: flex;
-    height: 49px;
-    position: sticky;
-    top: 0;
-    width: 100%;
-  }
-
-  h2 {
-    font-size: 21px;
-    font-weight: 800;
-    padding-left: 15px;
-  }
-
+  
   section {
+    flex: 1;
+  }
+  
+  div{
+    position: absolute;
+    right: 25%;
+    bottom: 0px;
+  }
+  
+  div {
+    position: sticky;
   }
 
   nav {
     background: #fff;
     bottom: 0;
     border-top: 1px solid #eee;
+    display: flex;
     height: 49px;
-    position: sticky;
+    position: relative
     width: 100%;
+  }
+
+
+  nav a {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    justify-content: center;
+  }
+
+  nav a:hover {
+    background: radial-gradient(#0099ff22 15%, transparent 16%);
+    background-size: 180px 180px;
+    background-position: center;
+  }
+
+  nav a:hover > :global(svg){
+    stroke: ${colors.primary};
+  } 
+
+  section.search{
+    align-items: center;
+    background: #fff; 
+    bottom: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search button{
+    background: rgba(0 ,0 , 0, 0.3);
+  }  
+
+  .search button:hover{
+    background: rgba(0 ,0 , 0, 0.2);
+    cursor:pointer;
   }
 `
