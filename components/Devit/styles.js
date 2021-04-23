@@ -10,6 +10,9 @@ export default css`
   div {
     padding-right: 10px;
   }
+  section {
+    width: 100%;
+  }
 
   section div {
     align-items: center;
