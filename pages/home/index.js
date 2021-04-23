@@ -9,7 +9,7 @@ import Devit from 'components/Devit'
 import useUser from 'hooks/useUser'
 
 import styles from './styles.js'
-import { fetchLatestDevits } from '../../firebase/client.js'
+import { fetchAndWatchLatestDevits } from '../../firebase/client.js'
 import Create from 'components/Icons/Create.js'
 import HomeIcon from 'components/Icons/Home.js'
 import Search from 'components/Icons/Search.js'
@@ -23,7 +23,7 @@ export default function Home ({ children }) {
   const user = useUser()
 
   useEffect(() => {
-    user && fetchLatestDevits().then(setTimeline)
+    user && fetchAndWatchLatestDevits(setTimeline)
   }, [user])
 
   const devitsFilter = (devit) => {
