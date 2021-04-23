@@ -48,21 +48,9 @@ export default css`
     position: relative;
   }
 
-  button {
-    background: rgba(0, 0, 0, 0.3);
-    border: 0;
-    border-radius: 999px;
-    color: #fff;
-    font-size: 24px;
-    width: 32px;
-    height: 32px;
+  figure > :global(button) {
     top: 15px;
     position: absolute;
     right: 15px;
-  }
-
-  button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    cursor: pointer;
   }
 `

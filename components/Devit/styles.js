@@ -38,13 +38,4 @@ export default css`
     margin: auto;
     width: 100%;
   }
-
-  button {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  button {
-    background: rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
 `

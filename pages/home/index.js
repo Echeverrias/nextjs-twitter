@@ -14,6 +14,7 @@ import Create from 'components/Icons/Create.js'
 import HomeIcon from 'components/Icons/Home.js'
 import Search from 'components/Icons/Search.js'
 import Header from 'components/Header/index.js'
+import DeleteButton from 'components/DeleteButton/index.js'
 
 export default function Home ({ children }) {
   const [timeline, setTimeline] = useState([])
@@ -93,7 +94,7 @@ export default function Home ({ children }) {
                 onClick={(e) => setFilter('')}
                 onKeyDown={handleKeyDown}
               />
-              <button onClick={handleCancelSearch}>x</button>
+              <DeleteButton onClick={handleCancelSearch} />
             </section>
           )}
           <nav>

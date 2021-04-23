@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import Header from 'components/Header/index.js'
+import DeleteButton from 'components/DeleteButton/index.js'
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -206,7 +207,7 @@ export default function ComposeTweet () {
             />
             {imgURL && (
               <figure className="loaded-img">
-                <button onClick={handleCancelImage}>x</button>
+                <DeleteButton onClick={handleCancelImage} />
                 <img src={imgURL} />
               </figure>
             )}

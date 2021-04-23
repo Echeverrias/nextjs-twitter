@@ -4,6 +4,7 @@ import useTimeAgo from 'hooks/useTimeAgo.js'
 import { deleteDevit } from 'firebase/client.js'
 
 import styles from './styles.js'
+import DeleteButton from 'components/DeleteButton/index.js'
 
 export default function Devit ({
   id,
@@ -26,9 +27,9 @@ export default function Devit ({
         <section>
           <div>
             <strong>{username}</strong>
-            {timeAgo && <time>{timeAgo}</time>}
+            {timeAgo && <time>{timeAgo}ZZZf</time>}
             {userId === actualUserId && (
-              <button onClick={() => deleteDevit(id)}>x</button>
+              <DeleteButton onClick={() => deleteDevit(id)} />
             )}
           </div>
           <p>{content}</p>

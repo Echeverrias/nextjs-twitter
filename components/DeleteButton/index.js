@@ -1,10 +1,10 @@
 import styles from './styles'
 
-export default function DeleteButton ({ children, disabled, onClick }) {
+export default function DeleteButton ({ disabled, onClick }) {
   return (
     <>
-      <button disabled={disabled} onClick={onClick}>
-        {children}
+      <button className="delete-button" disabled={disabled} onClick={onClick}>
+        x
       </button>
       <style jsx>{styles}</style>
     </>
