@@ -8,6 +8,10 @@ export default css`
     padding: 10px 15px;
   }
 
+  article:hover {
+    cursor: pointer;
+  }
+
   div {
     padding-right: 10px;
   }
@@ -20,11 +24,22 @@ export default css`
     display: flex;
   }
 
+  div.link {
+    flex: 1;
+  }
+
+  div.link a {
+    text-decoration: none;
+  }
+
+  div.link a:hover {
+    text-decoration: underline;
+  }
+
   time {
     padding-left: 10px;
     font-size: 15px;
     color: grey;
-    flex: 1;
   }
 
   p {
