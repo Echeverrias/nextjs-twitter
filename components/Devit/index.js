@@ -1,4 +1,5 @@
 import Avatar from 'components/Avatar'
+import Likes from 'components/Likes'
 import useTimeAgo from 'hooks/useTimeAgo.js'
 
 import { deleteDevit } from 'firebase/client.js'
@@ -7,14 +8,15 @@ import styles from './styles.js'
 import DeleteButton from 'components/DeleteButton/index.js'
 
 export default function Devit ({
-  id,
-  username,
   avatar,
   content,
   createdAt,
+  id,
   img,
+  likes,
+  user,
   userId,
-  actualUserId
+  username
 }) {
   const timeAgo = useTimeAgo(createdAt)
 
@@ -28,12 +30,15 @@ export default function Devit ({
           <div>
             <strong>{username}</strong>
             {timeAgo && <time>{timeAgo}ZZZf</time>}
-            {userId === actualUserId && (
+            {userId === user.uid && (
               <DeleteButton onClick={() => deleteDevit(id)} />
             )}
           </div>
           <p>{content}</p>
           <div>{img && <img src={img} />}</div>
+          <div>
+            <Likes likes={likes} user={user} id={id} />
+          </div>
         </section>
       </article>
       <style jsx>{styles}</style>

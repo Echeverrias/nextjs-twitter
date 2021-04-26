@@ -74,7 +74,8 @@ export default function ComposeTweet () {
       email: user.email,
       img: img || imgURL,
       userId: user.uid,
-      username: user.username
+      username: user.username,
+      likes: []
     })
       .then(() => router.push('/home'))
       .catch((err) => {

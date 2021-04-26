@@ -42,19 +42,26 @@ export const loginWithGitHub = () => {
   // .then(mapUserFromFirebaseAuth)
 }
 
-export const addDevit = ({ avatar, content, email, img, userId, username }) => {
+export const addDevit = ({
+  avatar,
+  content,
+  email,
+  img,
+  likes,
+  userId,
+  username
+}) => {
   console.log('CLIENT')
-  console.log({ avatar, content, email, img, userId, username })
+  console.log({ avatar, content, email, img, likes, userId, username })
   return db.collection('devits').add({
     avatar,
     content,
     email,
     img,
+    likes,
     userId,
     username,
-    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-    likesCount: 0,
-    sharedCount: 0
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date())
   })
 }
 
@@ -106,6 +113,19 @@ export const deleteDevit = (id) => {
   db.collection('devits')
     .doc(id)
     .delete()
+    .then(() => {
+      console.log('Document successfully deleted!')
+    })
+    .catch((error) => {
+      console.error('Error removing document: ', error)
+    })
+}
+
+export const updateDevit = (id, data) => {
+  console.log('deletedevit')
+  db.collection('devits')
+    .doc(id)
+    .update(data)
     .then(() => {
       console.log('Document successfully deleted!')
     })

@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css'
+import { colors } from 'styles/themes.js'
 
 export default css`
   article {
@@ -37,5 +38,10 @@ export default css`
     height: auto;
     margin: auto;
     width: 100%;
+    margin-bottom: 15px;
+  }
+
+  section div:hover :global(svg) {
+    stroke: ${colors.primary};
   }
 `

@@ -67,7 +67,16 @@ export default function Home ({ children }) {
           {timeline
             .filter(devitsFilter)
             .map(
-              ({ avatar, content, createdAt, id, img, username, userId }) => {
+              ({
+                avatar,
+                content,
+                createdAt,
+                id,
+                img,
+                likes,
+                username,
+                userId
+              }) => {
                 return (
                   <Devit
                     key={id}
@@ -76,9 +85,10 @@ export default function Home ({ children }) {
                     createdAt={createdAt}
                     id={id}
                     img={img}
+                    likes={likes}
                     username={username}
                     userId={userId}
-                    actualUserId={user.uid}
+                    user={user}
                   />
                 )
               }
