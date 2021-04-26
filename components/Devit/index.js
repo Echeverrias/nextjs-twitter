@@ -29,7 +29,7 @@ export default function Devit ({
         <section>
           <div>
             <strong>{username}</strong>
-            {timeAgo && <time>{timeAgo}ZZZf</time>}
+            {timeAgo && <time>{timeAgo}</time>}
             {userId === user.uid && (
               <DeleteButton onClick={() => deleteDevit(id)} />
             )}
