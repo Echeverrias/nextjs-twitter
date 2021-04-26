@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 
-import AppLayout from 'components/AppLayout'
 import Button from 'components/Button'
 import GitHub from 'components/Icons/GitHub'
 
@@ -10,7 +9,8 @@ import { colors } from 'styles/themes.js'
 
 import { loginWithGitHub } from 'firebase/client'
 import { useRouter } from 'next/router'
-import useUser, { USER_STATES } from 'hooks/useUser'
+import { USER_STATES } from 'hooks/useUser'
+import { useUser } from 'contexts/UserProvider.js'
 
 export default function App () {
   const user = useUser()
@@ -33,23 +33,20 @@ export default function App () {
         <title>Devter 🐦 </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <AppLayout>
-        <section>
-          <h1 className={styles.title}>Devter</h1>
-          <img src="/logo.png" />
-          <p className={styles.description}>Talk with other people</p>
-          <div>
-            {user === USER_STATES.NOT_LOGGED && (
-              <Button onClick={handleClick}>
-                <GitHub fill={'#fff'} width={24} height={24} />
-                Login with GitHub
-              </Button>
-            )}
-            {user === USER_STATES.NOT_KNOWN && <img src="spinner.gif" />}
-          </div>
-        </section>
-      </AppLayout>
+      <section>
+        <h1 className={styles.title}>Devter</h1>
+        <img src="/logo.png" />
+        <p className={styles.description}>Talk with other people</p>
+        <div>
+          {user === USER_STATES.NOT_LOGGED && (
+            <Button onClick={handleClick}>
+              <GitHub fill={'#fff'} width={24} height={24} />
+              Login with GitHub
+            </Button>
+          )}
+          {user === USER_STATES.NOT_KNOWN && <img src="spinner.gif" />}
+        </div>
+      </section>
       <style jsx>
         {`
           section {

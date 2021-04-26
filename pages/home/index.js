@@ -3,10 +3,9 @@ import Link from 'next/link'
 
 import { useState, useEffect } from 'react'
 
-import AppLayout from 'components/AppLayout'
 import Devit from 'components/Devit'
 
-import useUser from 'hooks/useUser'
+import { useUser } from 'contexts/UserProvider.js'
 
 import styles from './styles.js'
 import { fetchAndWatchLatestDevits } from '../../firebase/client.js'
@@ -61,71 +60,69 @@ export default function Home ({ children }) {
         <title>Inicio / Devter 🐦</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AppLayout>
-        <Header title={'Inicio'} />
-        <section>
-          {timeline
-            .filter(devitsFilter)
-            .map(
-              ({
-                avatar,
-                content,
-                createdAt,
-                id,
-                img,
-                likes,
-                username,
-                userId
-              }) => {
-                return (
-                  <Devit
-                    key={id}
-                    avatar={avatar}
-                    content={content}
-                    createdAt={createdAt}
-                    id={id}
-                    img={img}
-                    likes={likes}
-                    username={username}
-                    userId={userId}
-                    user={user}
-                  />
-                )
-              }
-            )}
-        </section>
-
-        <div>
-          {showSearchInput && (
-            <section className="search">
-              <Search width={32} height={32} stroke="#09f" />
-              <input
-                onChange={(e) => setFilter(e.target.value)}
-                onClick={(e) => setFilter('')}
-                onKeyDown={handleKeyDown}
-              />
-              <DeleteButton onClick={handleCancelSearch} />
-            </section>
+      <Header title={'Inicio'} />
+      <section>
+        {timeline
+          .filter(devitsFilter)
+          .map(
+            ({
+              avatar,
+              content,
+              createdAt,
+              id,
+              img,
+              likes,
+              username,
+              userId
+            }) => {
+              return (
+                <Devit
+                  key={id}
+                  avatar={avatar}
+                  content={content}
+                  createdAt={createdAt}
+                  id={id}
+                  img={img}
+                  likes={likes}
+                  username={username}
+                  userId={userId}
+                  user={user}
+                />
+              )
+            }
           )}
-          <nav>
-            <Link href="/home">
-              <a onClick={handleGoHome}>
-                <HomeIcon width={32} height={32} stroke="#09f" />
-              </a>
-            </Link>
-            <Link href="/home">
-              <a onClick={() => setShowSearchInput((prev) => !prev)}>
-                <Search width={32} height={32} stroke="#09f" />
-              </a>
-            </Link>
-            <Link href="/compose/tweet">
-              <a>
-                <Create width={32} height={32} stroke="#09f" />
-              </a>
-            </Link>
-          </nav>
-        </div>
-      </AppLayout>
+      </section>
+
+      <div>
+        {showSearchInput && (
+          <section className="search">
+            <Search width={32} height={32} stroke="#09f" />
+            <input
+              onChange={(e) => setFilter(e.target.value)}
+              onClick={(e) => setFilter('')}
+              onKeyDown={handleKeyDown}
+            />
+            <DeleteButton onClick={handleCancelSearch} />
+          </section>
+        )}
+        <nav>
+          <Link href="/home">
+            <a onClick={handleGoHome}>
+              <HomeIcon width={32} height={32} stroke="#09f" />
+            </a>
+          </Link>
+          <Link href="/home">
+            <a onClick={() => setShowSearchInput((prev) => !prev)}>
+              <Search width={32} height={32} stroke="#09f" />
+            </a>
+          </Link>
+          <Link href="/compose/tweet">
+            <a>
+              <Create width={32} height={32} stroke="#09f" />
+            </a>
+          </Link>
+        </nav>
+      </div>
       <style jsx>{styles}</style>
     </>
   )

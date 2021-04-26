@@ -1,10 +1,9 @@
 import { useState, useRef } from 'react'
 import styles from './styles.js'
 
-import AppLayout from 'components/AppLayout'
 import Avatar from 'components/Avatar'
 import Button from 'components/Button'
-import useUser from 'hooks/useUser'
+import { useUser } from 'contexts/UserProvider.js'
 import { addDevit, uploadFile } from 'firebase/client.js'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -183,41 +182,39 @@ export default function ComposeTweet () {
         <title>Creau un dev / Devter 🐦</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AppLayout>
-        <Header title={'Devit'} />
-        <section className="form-container">
-          {user && (
-            <figure className="avatar-container">
-              <Avatar alt={user.username} src={user.avatar} withText={false} />
+      <Header title={'Devit'} />
+      <section className="form-container">
+        {user && (
+          <figure className="avatar-container">
+            <Avatar alt={user.username} src={user.avatar} withText={false} />
+          </figure>
+        )}
+        <form onSubmit={handleSubmit}>
+          <textarea
+            name="content"
+            onChange={handleChange}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            placeholder="What is happening?"
+          ></textarea>
+          <input
+            ref={fileInput}
+            type="file"
+            name="file"
+            onChange={handleChange}
+          />
+          {imgURL && (
+            <figure className="loaded-img">
+              <DeleteButton onClick={handleCancelImage} />
+              <img src={imgURL} />
             </figure>
           )}
-          <form onSubmit={handleSubmit}>
-            <textarea
-              name="content"
-              onChange={handleChange}
-              onDragEnter={handleDragEnter}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              placeholder="What is happening?"
-            ></textarea>
-            <input
-              ref={fileInput}
-              type="file"
-              name="file"
-              onChange={handleChange}
-            />
-            {imgURL && (
-              <figure className="loaded-img">
-                <DeleteButton onClick={handleCancelImage} />
-                <img src={imgURL} />
-              </figure>
-            )}
-            <div>
-              <Button disabled={isButtonDissabled}>Devitear</Button>
-            </div>
-          </form>
-        </section>
-      </AppLayout>
+          <div>
+            <Button disabled={isButtonDissabled}>Devitear</Button>
+          </div>
+        </form>
+      </section>
       <style jsx>{`
         textarea {
           border: ${drag === DRAG_IMAGES_STATES.DRAG_OVER
