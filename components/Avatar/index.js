@@ -1,6 +1,6 @@
 import styles from './Avatar.module.css'
 
-export default function Avatar ({ alt, src, text, withText }) {
+export default function Avatar({ alt, src, text, withText }) {
   return (
     <>
       <div className={styles.container}>

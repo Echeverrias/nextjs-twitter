@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: 'nextjs-devter-7334e.appspot.com',
   messagingSenderId: '176466349404',
   appId: '1:176466349404:web:3a06147e3e8e28fe720599',
-  measurementId: 'G-ZBD4J9YQ9M'
+  measurementId: 'G-ZBD4J9YQ9M',
 }
 
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
@@ -21,7 +21,7 @@ const mapUserFromFirebaseAuth = (user) => {
     avatar: photoURL,
     username: displayName,
     email,
-    uid
+    uid,
   }
 }
 
@@ -49,7 +49,7 @@ export const addDevit = ({
   img,
   likes,
   userId,
-  username
+  username,
 }) => {
   console.log('CLIENT')
   console.log({ avatar, content, email, img, likes, userId, username })
@@ -61,7 +61,7 @@ export const addDevit = ({
     likes,
     userId,
     username,
-    createdAt: firebase.firestore.Timestamp.fromDate(new Date())
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
   })
 }
 
@@ -127,7 +127,7 @@ export const updateDevit = (id, data) => {
     .doc(id)
     .update(data)
     .then(() => {
-      console.log('Document successfully deleted!')
+      console.log('Document successfully updated!')
     })
     .catch((error) => {
       console.error('Error removing document: ', error)

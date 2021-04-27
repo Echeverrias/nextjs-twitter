@@ -4,7 +4,7 @@ export const DATE_UNITS = [
   ['day', 86400],
   ['hour', 3600],
   ['minute', 60],
-  ['second', 1]
+  ['second', 1],
 ]
 
 const getDateDiffs = (timestamp) => {
@@ -19,7 +19,7 @@ const getDateDiffs = (timestamp) => {
   }
 }
 
-export default function useTimeAgo (timestamp) {
+export default function useTimeAgo(timestamp) {
   const [timeAgo, setTimeAgo] = useState(() => getDateDiffs(timestamp))
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default function Search (props) {
+export default function Search(props) {
   return (
     <svg
       height={21}

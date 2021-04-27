@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default function Create (props) {
+export default function Create(props) {
   return (
     <svg
       height={21}

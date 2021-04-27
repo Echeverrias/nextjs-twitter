@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default function Like (props) {
+export default function Like(props) {
   return (
     <svg
       height={21}

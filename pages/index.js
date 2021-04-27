@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { USER_STATES } from 'hooks/useUser'
 import { useUser } from 'contexts/UserProvider.js'
 
-export default function App () {
+export default function App() {
   const user = useUser()
   const router = useRouter()
 

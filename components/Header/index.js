@@ -2,7 +2,7 @@ import LeftArrow from '../Icons/GoBack.js'
 import styles from './styles.js'
 import { useRouter } from 'next/router'
 
-export default function Header ({ title }) {
+export default function Header({ title }) {
   const router = useRouter()
 
   const handleClick = (e) => {

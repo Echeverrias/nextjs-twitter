@@ -1,4 +1,4 @@
-export default function Footer ({ styles, children }) {
+export default function Footer({ styles, children }) {
   return (
     <>
       <footer className="footer">

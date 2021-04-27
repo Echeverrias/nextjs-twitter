@@ -5,10 +5,10 @@ import router from 'next/router'
 
 export const USER_STATES = {
   NOT_LOGGED: null,
-  NOT_KNOWN: undefined
+  NOT_KNOWN: undefined,
 }
 
-export default function useUser () {
+export default function useUser() {
   const [user, setUser] = useState(USER_STATES.NOT_KNOWN)
 
   useEffect(() => {

@@ -7,7 +7,6 @@ import Devit from 'components/Devit'
 
 import { useUser } from 'contexts/UserProvider.js'
 
-import styles from './styles.js'
 import { fetchAndWatchLatestDevits } from '../../firebase/client.js'
 import Create from 'components/Icons/Create.js'
 import HomeIcon from 'components/Icons/Home.js'
@@ -15,7 +14,76 @@ import Search from 'components/Icons/Search.js'
 import Header from 'components/Header/index.js'
 import DeleteButton from 'components/DeleteButton/index.js'
 
-export default function Home ({ children }) {
+import { colors } from 'styles/themes.js'
+import css from 'styled-jsx/css'
+const styles = css`
+  article {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 10px 15px;
+  }
+
+  section {
+    flex: 1;
+  }
+
+  div {
+    position: absolute;
+    right: 25%;
+    bottom: 0px;
+  }
+
+  div {
+    position: sticky;
+  }
+
+  nav {
+    background: #fff;
+    bottom: 0;
+    border-top: 1px solid #eee;
+    display: flex;
+    height: 49px;
+    position: relative;
+    width: 100%;
+  }
+
+  nav a {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    justify-content: center;
+  }
+
+  nav a:hover {
+    background: radial-gradient(#0099ff22 15%, transparent 16%);
+    background-size: 180px 180px;
+    background-position: center;
+  }
+
+  nav a:hover > :global(svg) {
+    stroke: ${colors.primary};
+  }
+
+  section.search {
+    align-items: center;
+    background: #fff;
+    bottom: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search button {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .search button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+`
+
+export default function Home({ children }) {
   const [timeline, setTimeline] = useState([])
   const [filter, setFilter] = useState(null)
   const [showSearchInput, setShowSearchInput] = useState(false)
@@ -73,7 +141,7 @@ export default function Home ({ children }) {
               img,
               likes,
               username,
-              userId
+              userId,
             }) => {
               return (
                 <Devit

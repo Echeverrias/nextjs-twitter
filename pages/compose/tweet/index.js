@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import styles from './styles.js'
 
 import Avatar from 'components/Avatar'
 import Button from 'components/Button'
@@ -11,11 +10,67 @@ import Head from 'next/head'
 import Header from 'components/Header/index.js'
 import DeleteButton from 'components/DeleteButton/index.js'
 
+import css from 'styled-jsx/css'
+const styles = css`
+  div {
+    display: grid;
+    height: 100%;
+    place-content: center;
+    place-items: center;
+  }
+
+  .form-container {
+    align-items: start;
+    display: flex;
+  }
+
+  .avatar-container {
+    padding-top: 20px;
+    padding-left: 10px;
+  }
+
+  section div {
+    padding: 15px;
+  }
+
+  form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  textarea {
+    border-radius: 10px;
+    font-size: 21px;
+    min-height: 200px;
+    outline: 0;
+    padding: 15px;
+    resize: none;
+    width: 100%;
+  }
+
+  img {
+    border-radius: 10px;
+    height: auto;
+    width: 100%;
+  }
+
+  .loaded-img {
+    position: relative;
+  }
+
+  figure > :global(button) {
+    top: 15px;
+    position: absolute;
+    right: 15px;
+  }
+`
+
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
   LOADING: 1,
   SUCCESS: 2,
-  ERROR: -1
+  ERROR: -1,
 }
 
 const DRAG_IMAGES_STATES = {
@@ -23,7 +78,7 @@ const DRAG_IMAGES_STATES = {
   NONE: 0,
   DRAG_OVER: 1,
   UPLOADING: 2,
-  COMPLETE: 3
+  COMPLETE: 3,
 }
 
 // const IMAGES_EXTENSIONS = new Set(['jpg', 'jpeg', 'gif', 'svg', 'png'])
@@ -40,7 +95,7 @@ const isValidImage = (file) => {
   */
 }
 
-export default function ComposeTweet () {
+export default function ComposeTweet() {
   const [formData, setFormData] = useState({ content: '' })
   const [status, setStatus] = useState(COMPOSE_STATES.USER_NOT_KNOWN)
   const [drag, setDrag] = useState(DRAG_IMAGES_STATES.NONE)
@@ -74,7 +129,7 @@ export default function ComposeTweet () {
       img: img || imgURL,
       userId: user.uid,
       username: user.username,
-      likes: []
+      likes: [],
     })
       .then(() => router.push('/home'))
       .catch((err) => {

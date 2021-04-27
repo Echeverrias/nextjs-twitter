@@ -10,7 +10,7 @@ import DeleteButton from 'components/DeleteButton/index.js'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default function Devit ({
+export default function Devit({
   avatar,
   content,
   createdAt,
@@ -19,7 +19,7 @@ export default function Devit ({
   likes,
   user,
   userId,
-  username
+  username,
 }) {
   const timeAgo = useTimeAgo(createdAt)
   const dateTimeFormat = useDateTimeFormat(createdAt)
@@ -27,7 +27,9 @@ export default function Devit ({
 
   const handleArticleClick = (e) => {
     e.preventDefault()
-    router.push('/status/[id]', `/status/${id}`)
+    if (e.target.nodeName !== 'svg' && e.target.nodeName !== 'path') {
+      router.push('/status/[id]', `/status/${id}`)
+    }
   }
 
   return (
@@ -49,7 +51,7 @@ export default function Devit ({
                 </Link>
               </div>
             )}
-            {userId === user.uid && (
+            {userId === user?.uid && (
               <DeleteButton onClick={() => deleteDevit(id)} />
             )}
           </div>

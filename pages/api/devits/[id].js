@@ -12,11 +12,10 @@ export default (request, response) => {
       const data = doc.data()
       const id = doc.id
       const { createdAt } = data
-
       response.json({
         ...data,
         id,
-        createdAt: +createdAt.toDate()
+        createdAt: +createdAt.toDate(),
       })
     })
     .catch(() => {

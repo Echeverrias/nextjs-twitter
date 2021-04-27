@@ -1,25 +1,25 @@
 const RULES = {
   OFF: 'off',
   WARN: 'warn',
-  ERROR: 'error'
+  ERROR: 'error',
 }
 
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
-  extends: ['plugin:react/recommended', 'standard'],
+  extends: ['plugin:react/recommended', 'standard', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['react'],
   rules: {
     'react/prop-types': RULES.OFF,
-    'react/react-in-jsx-scope': RULES.OFF
-  }
+    'react/react-in-jsx-scope': RULES.OFF,
+  },
 }
